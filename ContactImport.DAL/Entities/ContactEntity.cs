@@ -2,7 +2,7 @@
 
 public class ContactEntity
 {
-    public Guid ContactId { get; set; }
+    public Guid Id { get; set; }
     public string? Name { get; set; }
     public string Surname { get; set; } = null!;
     public string? RodneCislo { get; set; }

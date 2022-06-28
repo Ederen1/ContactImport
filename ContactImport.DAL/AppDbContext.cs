@@ -1,6 +1,14 @@
-﻿namespace ContactImport.DAL;
+﻿using ContactImport.DAL.Entities;
+using Microsoft.EntityFrameworkCore;
 
-public class AppDbContext
+namespace ContactImport.DAL;
+
+public class AppDbContext : DbContext
 {
-    
+    public AppDbContext(DbContextOptions options) : base(options)
+    {
+    }
+
+    public DbSet<ContactEntity> Contacts => Set<ContactEntity>();
+    public DbSet<PhoneNumberEntity> PhoneNumbers => Set<PhoneNumberEntity>();
 }
