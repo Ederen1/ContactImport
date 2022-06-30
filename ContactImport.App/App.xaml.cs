@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using ContactImport.DAL;
 using ContactImport.Services;
+using ContactImport.ViewModels;
 using CsvHelper.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -42,9 +43,10 @@ namespace ContactImport
 
             // services.AddDbContext<AppDbContext>(builder =>
                 // builder.UseSqlServer(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString));
-            services.AddSingleton<IJsonImportService, JsonImportService>();
-            services.AddSingleton(_ => new CsvConfiguration(CultureInfo.InvariantCulture)
-                {PrepareHeaderForMatch = args => args.Header.ToLower()});
+            services.AddSingleton<ICsvImportService, CsvImportService>();
+            services.AddSingleton(_ => new CsvConfiguration(CultureInfo.InvariantCulture){Delimiter = ";"});
+            services.AddTransient<MainViewModel>();
+            services.AddScoped<IContactService, ContactService>();
             
             services.AddDbContext<AppDbContext>(builder => builder.UseInMemoryDatabase("TEST"));
         }

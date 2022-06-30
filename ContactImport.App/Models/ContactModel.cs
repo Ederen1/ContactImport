@@ -1,25 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+using CsvHelper.Configuration.Attributes;
 
 namespace ContactImport.Models;
 
 public record ContactModel
 {
-    public ContactModel(Guid id, string surname, string? name, string? rodneCislo, string? adress, List<PhoneNumberModel> numbers)
-    {
-        this.Id = id;
-        this.Surname = surname;
-        this.Name = name;
-        this.RodneCislo = rodneCislo;
-        this.Adress = adress;
-        this.Numbers = numbers;
-    }
-    
-    public string? Adress { get; init; }
-    public Guid Id { get; init; }
-    public string Surname { get; init; }
-    public string? Name { get; init; }
-    public string? RodneCislo { get; init; }
-    public List<PhoneNumberModel> Numbers { get; init; }
+    [Ignore] public Guid Id { get; init; }
+    [Optional] [Name("Jméno")] public string? Name { get; init; }
+    [Name("Příjmení")] public string Surname { get; init; }
+    [Optional] [Name("RČ")] public string? RodneCislo { get; init; }
+    [Optional] [Name("Adresa")] public string? Adress { get; init; }
+    [Optional] [Name("Telefon 1")] public string? Number1 { get; set; }
+    [Optional] [Name("Telefon 2")] public string? Number2 { get; set; }
+    [Optional] [Name("Telefon 3")] public string? Number3 { get; set; }
 }
