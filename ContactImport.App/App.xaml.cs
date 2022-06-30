@@ -6,6 +6,7 @@ using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using ContactImport.BL.Services;
 using ContactImport.DAL;
 using ContactImport.Services;
 using ContactImport.ViewModels;
@@ -48,7 +49,7 @@ namespace ContactImport
             services.AddTransient<MainViewModel>();
             services.AddScoped<IContactService, ContactService>();
             
-            services.AddDbContext<AppDbContext>(builder => builder.UseInMemoryDatabase("TEST"));
+            services.AddDbContext<AppDbContext>(builder => builder.UseInMemoryDatabase("TEST").UseLazyLoadingProxies());
         }
     }
 }

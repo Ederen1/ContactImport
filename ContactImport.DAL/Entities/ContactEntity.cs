@@ -7,5 +7,5 @@ public class ContactEntity
     public string Surname { get; set; } = null!;
     public string? RodneCislo { get; set; }
     public string? Address { get; set; }
-    public List<PhoneNumberEntity> PhoneNumbers = new();
+    public virtual List<PhoneNumberEntity> PhoneNumbers { get; set; } = new();
 }

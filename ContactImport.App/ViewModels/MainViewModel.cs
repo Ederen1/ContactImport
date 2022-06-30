@@ -3,6 +3,7 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using ContactImport.BL.Services;
 using ContactImport.Services;
 using Microsoft.Toolkit.Mvvm.Input;
 using Microsoft.Win32;
@@ -30,8 +31,8 @@ public class MainViewModel : BaseViewModel
             if (fileDialog.ShowDialog() != true)
                 return;
             
-            var models = await _importService.ReadFileAsync(fileDialog.FileName);
-            await _contactService.ImportContacts(models);
+            var contacts = await _importService.ReadFileAsync(fileDialog.FileName);
+            await _contactService.ImportContacts(contacts);
         }
         catch (InvalidDataException e)
         {

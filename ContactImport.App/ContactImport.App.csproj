@@ -11,13 +11,14 @@
     <ItemGroup>
       <PackageReference Include="CsvHelper" Version="27.2.1" />
       <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="6.0.6" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="6.0.6" />
       <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.6" />
       <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
       <PackageReference Include="Microsoft.Toolkit.Mvvm" Version="7.1.2" />
-      <PackageReference Include="System.Linq.Async" Version="6.0.1" />
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\ContactImport.BL\ContactImport.BL.csproj" />
       <ProjectReference Include="..\ContactImport.DAL\ContactImport.DAL.csproj" />
     </ItemGroup>
 

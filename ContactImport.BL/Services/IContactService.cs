@@ -1,8 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using ContactImport.Models;
+﻿using ContactImport.Models;
 
-namespace ContactImport.Services;
+namespace ContactImport.BL.Services;
 
 public interface IContactService
 {

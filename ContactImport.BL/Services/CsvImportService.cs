@@ -1,13 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Data;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Data;
 using ContactImport.Models;
+using ContactImport.Services;
 using CsvHelper;
 using CsvHelper.Configuration;
 
-namespace ContactImport.Services;
+namespace ContactImport.BL.Services;
 
 public class CsvImportService : ICsvImportService
 {

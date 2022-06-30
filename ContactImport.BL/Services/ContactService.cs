@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using ContactImport.BL.Services;
 using ContactImport.DAL;
 using ContactImport.DAL.Entities;
 using ContactImport.Models;
