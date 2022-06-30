@@ -19,7 +19,7 @@ public class ContactService : IContactService
         _dbContext = dbContext;
     }
 
-    public async Task ImportContacts(IEnumerable<ContactModel> models)
+    public async Task<ImportReport> ImportContacts(IEnumerable<ContactModel> models)
     {
         var entities = models.Select(model =>
         {
@@ -43,8 +43,26 @@ public class ContactService : IContactService
             return entity;
         });
 
-        await _dbContext.Contacts.AddRangeAsync(entities);
+        int newContacts = 0, updatedContacts = 0;
+        foreach (var contactEntity in entities)
+        {
+            var inDb = await _dbContext.Contacts.FirstOrDefaultAsync(
+                item => item.RodneCislo == contactEntity.RodneCislo);
+            if (inDb is not null)
+            {
+                _dbContext.Contacts.Remove(inDb);
+                updatedContacts++;
+            }
+            else
+            {
+                newContacts++;
+            }
+
+            _dbContext.Contacts.Add(contactEntity);
+        }
+
         await _dbContext.SaveChangesAsync();
+        return new ImportReport(newContacts, updatedContacts);
     }
 
     public async Task<IEnumerable<ContactModel>> AllContacts()

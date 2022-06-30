@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -32,7 +33,9 @@ public class MainViewModel : BaseViewModel
                 return;
             
             var contacts = await _importService.ReadFileAsync(fileDialog.FileName);
-            await _contactService.ImportContacts(contacts);
+            var report = await _contactService.ImportContacts(contacts);
+
+            MessageBox.Show($"Successfully imported {report.New} contacts, updated {report.Updated}");
         }
         catch (InvalidDataException e)
         {
