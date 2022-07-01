@@ -20,7 +20,7 @@ public class ContactServiceUnitTests : UnitTestBase
                 Adress = "Adresa 1/1 Brno",
                 Name = "Jiří",
                 Surname = "Neuhort",
-                RodneCislo = "9001019101",
+                RC = "9001019101",
                 Number1 = "646545371",
             }
         };
@@ -42,7 +42,7 @@ public class ContactServiceUnitTests : UnitTestBase
                 Adress = "Adresa 1/1 Brno",
                 Name = "Jiří",
                 Surname = "Neuhort",
-                RodneCislo = "9001019101",
+                RC = "9001019101",
                 Number1 = "646545371",
             },
             new()
@@ -50,7 +50,7 @@ public class ContactServiceUnitTests : UnitTestBase
                 Adress = "Adresa 1/1 Brno",
                 Name = "Jiří",
                 Surname = "Neuhort",
-                RodneCislo = "9001019101",
+                RC = "9001019101",
                 Number1 = "646545371",
             },
             new()
@@ -58,7 +58,7 @@ public class ContactServiceUnitTests : UnitTestBase
                 Adress = "Adresa 1/1 Brno",
                 Name = "Jiří",
                 Surname = "Neuhort",
-                RodneCislo = "9001019101",
+                RC = "9001019101",
                 Number1 = "646545371",
             }
         };
@@ -79,7 +79,7 @@ public class ContactServiceUnitTests : UnitTestBase
                 Adress = "Adresa 1/1 Brno",
                 Name = "Jiří",
                 Surname = "Neuhort",
-                RodneCislo = "9001019101",
+                RC = "9001019101",
                 Number1 = "646545371",
             },
         };

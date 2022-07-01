@@ -19,16 +19,16 @@ public class ContactService : IContactService
         _dbContext = dbContext;
     }
 
-    public async Task<ImportReport> ImportContacts(IEnumerable<ContactModel> models)
+    public async Task<(int New, int Updated)> ImportContacts(IEnumerable<ContactModel> toImport)
     {
-        var entities = models.Select(model =>
+        var entities = toImport.Select(model =>
         {
             var entity = new ContactEntity
             {
                 Address = model.Adress,
                 Name = model.Name,
                 Surname = model.Surname,
-                RodneCislo = model.RodneCislo,
+                RC = model.RC,
             };
 
             if (model.Number1 is not null)
@@ -47,7 +47,7 @@ public class ContactService : IContactService
         foreach (var contactEntity in entities)
         {
             var inDb = await _dbContext.Contacts.FirstOrDefaultAsync(
-                item => item.RodneCislo == contactEntity.RodneCislo);
+                item => item.RC == contactEntity.RC);
             if (inDb is not null)
             {
                 _dbContext.Contacts.Remove(inDb);
@@ -62,7 +62,7 @@ public class ContactService : IContactService
         }
 
         await _dbContext.SaveChangesAsync();
-        return new ImportReport(newContacts, updatedContacts);
+        return (newContacts, updatedContacts);
     }
 
     public async Task<IEnumerable<ContactModel>> AllContacts()
@@ -75,7 +75,7 @@ public class ContactService : IContactService
                 Adress = entity.Address,
                 Name = entity.Name,
                 Surname = entity.Surname,
-                RodneCislo = entity.RodneCislo,
+                RC = entity.RC,
             };
 
             if (entity.PhoneNumbers.Count >= 1)

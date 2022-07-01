@@ -33,9 +33,9 @@ public class MainViewModel : BaseViewModel
                 return;
             
             var contacts = await _importService.ReadFileAsync(fileDialog.FileName);
-            var report = await _contactService.ImportContacts(contacts);
+            var (newContacts, updatedContacts) = await _contactService.ImportContacts(contacts);
 
-            MessageBox.Show($"Successfully imported {report.New} contacts, updated {report.Updated}");
+            MessageBox.Show($"Successfully imported {newContacts} contacts, updated {updatedContacts}");
         }
         catch (InvalidDataException e)
         {

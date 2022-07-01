@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using ContactImport.Models;
+﻿using ContactImport.Models;
 
-namespace ContactImport.Services;
+namespace ContactImport.BL.Services;
 
 public interface ICsvImportService
 {
+    /// <summary>
+    /// Parse CSV file specified in path an return a list of contacts it contained
+    /// </summary>
+    /// <param name="path">CSV file path</param>
     public Task<IEnumerable<ContactModel>> ReadFileAsync(string path);
 }
