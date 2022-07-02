@@ -2,10 +2,13 @@
 using System.Globalization;
 using System.Windows;
 using ContactImport.BL.Services;
+using ContactImport.BL.Validators;
 using ContactImport.DAL;
+using ContactImport.Models;
 using ContactImport.Services;
 using ContactImport.ViewModels;
 using CsvHelper.Configuration;
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -43,6 +46,7 @@ namespace ContactImport
             services.AddSingleton(_ => new CsvConfiguration(CultureInfo.InvariantCulture){Delimiter = ";"});
             services.AddTransient<MainViewModel>();
             services.AddScoped<IContactService, ContactService>();
+            services.AddScoped<IValidator<ContactModel>, ContactModelValidator>();
             
             services.AddDbContext<AppDbContext>(builder => builder.UseInMemoryDatabase("TEST").UseLazyLoadingProxies());
         }

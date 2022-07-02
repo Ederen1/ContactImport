@@ -1,4 +1,6 @@
-﻿namespace ContactImport.DAL.Entities;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace ContactImport.DAL.Entities;
 
 public class ContactEntity
 {
