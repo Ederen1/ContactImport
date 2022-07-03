@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using ContactImport.Models;
-using ContactImport.Services;
+using ContactImport.BL.Models;
+using ContactImport.BL.Services;
 using Xunit;
 
 namespace ContactImport.BL.Tests;
@@ -12,7 +12,7 @@ public class ContactServiceUnitTests : UnitTestBase
     [Fact]
     public async Task ImportContactsInsertOne()
     {
-        var service = new ContactService(DbContext);
+        var service = new ContactService(DbContext, Mapper);
         var dummyModels = new List<ContactModel>
         {
             new()
@@ -34,7 +34,7 @@ public class ContactServiceUnitTests : UnitTestBase
     [Fact]
     public async Task ImportContactsInsertMultiple()
     {
-        var service = new ContactService(DbContext);
+        var service = new ContactService(DbContext, Mapper);
         var dummyModels = new List<ContactModel>
         {
             new()
@@ -71,7 +71,7 @@ public class ContactServiceUnitTests : UnitTestBase
     [Fact]
     public async Task ImportContactInsertWithNumber()
     {
-        var service = new ContactService(DbContext);
+        var service = new ContactService(DbContext, Mapper);
         var dummyModels = new List<ContactModel>
         {
             new()
@@ -85,8 +85,6 @@ public class ContactServiceUnitTests : UnitTestBase
         };
 
         await service.ImportContacts(dummyModels);
-        Assert.Single(DbContext.PhoneNumbers);
-        Assert.Single(DbContext.Contacts.First().PhoneNumbers);
-        Assert.Equal("646545371", DbContext.Contacts.First().PhoneNumbers.First().PhoneNumber);
+        Assert.Equal("646545371", DbContext.Contacts.First().Number1);
     }
 }

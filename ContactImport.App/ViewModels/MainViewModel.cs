@@ -5,8 +5,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using ContactImport.BL.Models;
 using ContactImport.BL.Services;
-using ContactImport.Models;
 using Microsoft.Toolkit.Mvvm.Input;
 using Microsoft.Win32;
 
@@ -37,8 +37,9 @@ public class MainViewModel : BaseViewModel
             var contacts = (await _importService.ReadFileAsync(fileDialog.FileName)).ToList();
             
             var (newContacts, updatedContacts) = await _contactService.ImportContacts(contacts);
-            MessageBox.Show($"Successfully imported {newContacts} contacts, updated {updatedContacts}");
             await Reload();
+
+            MessageBox.Show($"Successfully imported {newContacts} contacts, updated {updatedContacts}");
         }
         catch (InvalidDataException e)
         {

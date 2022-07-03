@@ -1,5 +1,5 @@
 ﻿using System.Data;
-using ContactImport.Models;
+using ContactImport.BL.Models;
 using CsvHelper;
 using CsvHelper.Configuration;
 using FluentValidation;

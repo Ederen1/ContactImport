@@ -1,4 +1,4 @@
-﻿using ContactImport.Models;
+﻿using ContactImport.BL.Models;
 
 namespace ContactImport.BL.Services;
 

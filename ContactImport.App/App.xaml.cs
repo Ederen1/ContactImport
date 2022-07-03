@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Globalization;
 using System.Windows;
+using AutoMapper;
+using ContactImport.BL;
+using ContactImport.BL.Models;
 using ContactImport.BL.Services;
 using ContactImport.BL.Validators;
 using ContactImport.DAL;
-using ContactImport.Models;
-using ContactImport.Services;
 using ContactImport.ViewModels;
 using CsvHelper.Configuration;
 using FluentValidation;
@@ -47,6 +48,7 @@ namespace ContactImport
             services.AddTransient<MainViewModel>();
             services.AddScoped<IContactService, ContactService>();
             services.AddScoped<IValidator<ContactModel>, ContactModelValidator>();
+            services.AddAutoMapper(typeof(AutoMapperConfig));
             
             services.AddDbContext<AppDbContext>(builder => builder.UseInMemoryDatabase("TEST").UseLazyLoadingProxies());
         }

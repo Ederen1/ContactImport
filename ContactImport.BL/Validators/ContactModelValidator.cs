@@ -1,4 +1,4 @@
-﻿using ContactImport.Models;
+﻿using ContactImport.BL.Models;
 using FluentValidation;
 
 namespace ContactImport.BL.Validators;

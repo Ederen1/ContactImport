@@ -1,7 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace ContactImport.DAL.Entities;
 
+[Index(nameof(RC))]
 public class ContactEntity
 {
     public Guid Id { get; set; }
@@ -9,5 +10,7 @@ public class ContactEntity
     public string Surname { get; set; } = null!;
     public string? RC { get; set; }
     public string? Address { get; set; }
-    public virtual List<PhoneNumberEntity> PhoneNumbers { get; set; } = new();
+    public string? Number1 { get; set; }
+    public string? Number2 { get; set; }
+    public string? Number3 { get; set; }
 }

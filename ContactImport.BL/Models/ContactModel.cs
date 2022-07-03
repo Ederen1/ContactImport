@@ -1,11 +1,9 @@
-﻿using System;
-using CsvHelper.Configuration.Attributes;
+﻿using CsvHelper.Configuration.Attributes;
 
-namespace ContactImport.Models;
+namespace ContactImport.BL.Models;
 
 public record ContactModel
 {
-    [Ignore] public Guid Id { get; init; }
     [Optional] [Name("Jméno")] public string? Name { get; init; }
     [Name("Příjmení")] public string Surname { get; init; }
     [Optional] [Name("RČ")] public string? RC { get; init; }

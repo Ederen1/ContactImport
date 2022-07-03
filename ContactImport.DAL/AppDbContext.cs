@@ -10,5 +10,4 @@ public class AppDbContext : DbContext
     }
 
     public DbSet<ContactEntity> Contacts => Set<ContactEntity>();
-    public DbSet<PhoneNumberEntity> PhoneNumbers => Set<PhoneNumberEntity>();
 }
