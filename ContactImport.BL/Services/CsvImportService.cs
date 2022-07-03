@@ -18,13 +18,13 @@ public class CsvImportService : ICsvImportService
         _contactValidator = contactValidator;
     }
 
-    public async Task<IEnumerable<ContactModel>> ReadFileAsync(string path)
+    public async Task<IEnumerable<ContactModel>> ReadCsvAsync(string path)
     {
         using var reader = new StreamReader(path);
-        return await ReadStreamAsync(reader);
+        return await ReadCsvAsync(reader);
     }
 
-    public async Task<IEnumerable<ContactModel>> ReadStreamAsync(TextReader reader)
+    public async Task<IEnumerable<ContactModel>> ReadCsvAsync(TextReader reader)
     {
         using var csv = new CsvReader(reader, _csvConfig);
 

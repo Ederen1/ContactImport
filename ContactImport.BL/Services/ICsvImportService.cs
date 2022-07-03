@@ -8,8 +8,8 @@ public interface ICsvImportService
     /// Parse CSV file specified in path an return a list of contacts it contained
     /// </summary>
     /// <param name="path">CSV file path</param>
-    public Task<IEnumerable<ContactModel>> ReadFileAsync(string path);
+    public Task<IEnumerable<ContactModel>> ReadCsvAsync(string path);
 
-    public Task<IEnumerable<ContactModel>> ReadStreamAsync(TextReader reader);
+    public Task<IEnumerable<ContactModel>> ReadCsvAsync(TextReader reader);
 
 }

@@ -25,7 +25,7 @@ public class CsvImportServiceTests : UnitTestBase
     public async Task ReadStreamAsyncEmptyTest()
     {
         using var reader = ToReader("");
-        var models = await _service.ReadStreamAsync(reader);
+        var models = await _service.ReadCsvAsync(reader);
         Assert.Empty(models);
     }
 
@@ -33,7 +33,7 @@ public class CsvImportServiceTests : UnitTestBase
     public async Task ReadStreamAsyncOnlyHeaderTest()
     {
         using var reader = ToReader("Jméno;Příjmení;RČ;Adresa;Telefon 1;Telefon 2");
-        var models = await _service.ReadStreamAsync(reader);
+        var models = await _service.ReadCsvAsync(reader);
         Assert.Empty(models);
     }
 
@@ -43,7 +43,7 @@ public class CsvImportServiceTests : UnitTestBase
         await Assert.ThrowsAsync<HeaderValidationException>(async () =>
         {
             using var reader = ToReader("Jméno;Příjmen;RČ;Adresa;Telefon 1;Telefon 2");
-            await _service.ReadStreamAsync(reader);
+            await _service.ReadCsvAsync(reader);
         });
     }
 
@@ -52,7 +52,7 @@ public class CsvImportServiceTests : UnitTestBase
     {
         using var stream = ToReader(@"Jméno;Příjmení;RČ;Adresa;Telefon 1;Telefon 2
 Jiří;Mikát;9001019101;Babická 1 Brno;646545371;965360082");
-        var models = (await _service.ReadStreamAsync(stream)).ToList();
+        var models = (await _service.ReadCsvAsync(stream)).ToList();
         Assert.Single(models);
         Assert.Equal("9001019101", models.First().RC);
     }
@@ -67,7 +67,7 @@ Jan;Buš;9001019103;Bačovského 3 Brno;761868826;391020782
 Pavel;Hříbek;9001019104;Bakalovo nábřeží 4 Brno;845250401;422500508
 Michaela;Olšanská;9001019105;Balbínova 5 Brno;403675746;817680713
 Jaroslava;Rosová;9001019106;Banskobystrická 6 Brno;310443389;485517660");
-        var models = (await _service.ReadStreamAsync(stream)).ToList();
+        var models = (await _service.ReadCsvAsync(stream)).ToList();
         Assert.Equal(6, models.Count);
         Assert.Equal("9001019101", models.First().RC);
         Assert.Equal("9001019104", models[3].RC);
@@ -78,6 +78,6 @@ Jaroslava;Rosová;9001019106;Banskobystrická 6 Brno;310443389;485517660");
     {
         using var stream = ToReader(@"Jméno;Příjmení;RČ;Adresa;Telefon 1;Telefon 2
 Jiří;Mikát;9005641019101;Babická 1 Brno;646545371;965360082");
-        await Assert.ThrowsAsync<FluentValidation.ValidationException>(async () => await _service.ReadStreamAsync(stream));
+        await Assert.ThrowsAsync<FluentValidation.ValidationException>(async () => await _service.ReadCsvAsync(stream));
     }
 }

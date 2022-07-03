@@ -25,6 +25,20 @@ namespace ContactImport
 
         protected override void OnStartup(StartupEventArgs e)
         {
+            try
+            {
+                SetupAndRun();
+            }
+            catch (Exception ex) when (Env.Debugging)
+            {
+                MessageBox.Show(ex.Message, "Error");
+            }
+
+            base.OnStartup(e);
+        }
+
+        private void SetupAndRun()
+        {
             var services = new ServiceCollection();
             ConfigureServices(services);
             _serviceProvider = services.BuildServiceProvider();
@@ -34,8 +48,6 @@ namespace ContactImport
 
             var mainWindow = _serviceProvider.GetService<MainWindow>();
             mainWindow!.Show();
-
-            base.OnStartup(e);
         }
 
         private static void ConfigureServices(IServiceCollection services)

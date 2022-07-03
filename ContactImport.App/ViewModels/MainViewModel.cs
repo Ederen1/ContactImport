@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Input;
 using ContactImport.BL.Models;
 using ContactImport.BL.Services;
+using FluentValidation;
 using Microsoft.Toolkit.Mvvm.Input;
 using Microsoft.Win32;
 
@@ -37,14 +38,14 @@ public class MainViewModel : BaseViewModel
             if (fileDialog.ShowDialog() != true)
                 return;
             
-            var contacts = (await _importService.ReadFileAsync(fileDialog.FileName)).ToList();
+            var contacts = (await _importService.ReadCsvAsync(fileDialog.FileName)).ToList();
             
             var (newContacts, updatedContacts) = await _contactService.ImportContacts(contacts);
             await Reload();
 
             MessageBox.Show($"Successfully imported {newContacts} contacts, updated {updatedContacts}", MessageCaption);
         }
-        catch (Exception e)
+        catch (ValidationException e) when (Env.Debugging)
         {
             MessageBox.Show(e.Message, MessageCaption);
         }
