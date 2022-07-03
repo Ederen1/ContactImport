@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Globalization;
 using System.Windows;
 using AutoMapper;
@@ -37,12 +38,12 @@ namespace ContactImport
             base.OnStartup(e);
         }
 
-        private static void ConfigureServices(ServiceCollection services)
+        private static void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<MainWindow>();
 
-            // services.AddDbContext<AppDbContext>(builder =>
-                // builder.UseSqlServer(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString));
+            services.AddDbContext<AppDbContext>(builder =>
+                builder.UseSqlServer(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString));
             services.AddSingleton<ICsvImportService, CsvImportService>();
             services.AddSingleton(_ => new CsvConfiguration(CultureInfo.InvariantCulture){Delimiter = ";"});
             services.AddTransient<MainViewModel>();
@@ -50,7 +51,7 @@ namespace ContactImport
             services.AddScoped<IValidator<ContactModel>, ContactModelValidator>();
             services.AddAutoMapper(typeof(AutoMapperConfig));
             
-            services.AddDbContext<AppDbContext>(builder => builder.UseInMemoryDatabase("TEST").UseLazyLoadingProxies());
+            // services.AddDbContext<AppDbContext>(builder => builder.UseInMemoryDatabase("TEST").UseLazyLoadingProxies());
         }
     }
 }

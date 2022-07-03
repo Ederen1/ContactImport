@@ -9,8 +9,7 @@ public abstract class UnitTestBase : IDisposable
 {
     protected UnitTestBase()
     {
-        DbContext = new AppDbContext(new DbContextOptionsBuilder().UseInMemoryDatabase("TESTDB").UseLazyLoadingProxies()
-            .Options);
+        DbContext = new AppDbContext(new DbContextOptionsBuilder().UseInMemoryDatabase("TESTDB").Options);
         Mapper = new Mapper(new MapperConfiguration(cfg => cfg.AddProfile(typeof(AutoMapperConfig))));
     }
 

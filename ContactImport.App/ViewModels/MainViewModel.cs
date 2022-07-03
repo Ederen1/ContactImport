@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
@@ -16,7 +15,9 @@ public class MainViewModel : BaseViewModel
 {
     private readonly ICsvImportService _importService;
     private readonly IContactService _contactService;
-    public ICommand ImportCsvClickCommand { get; set; }
+    public ICommand ImportCsvClickCommand { get; }
+    
+    public ICommand ReloadCommand { get; }
     public ObservableCollection<ContactModel> Contacts { get; } = new();
 
     public MainViewModel(ICsvImportService importService, IContactService contactService)
@@ -24,6 +25,7 @@ public class MainViewModel : BaseViewModel
         _importService = importService;
         _contactService = contactService;
         ImportCsvClickCommand = new AsyncRelayCommand(ImportCsvClick);
+        ReloadCommand = new AsyncRelayCommand(Reload);
     }
     private const string MessageCaption = "Import status";
 
