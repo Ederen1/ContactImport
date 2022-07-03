@@ -6,12 +6,12 @@ namespace ContactImport.BL.Tests;
 
 public abstract class UnitTestBase : IDisposable
 {
-    public UnitTestBase()
+    protected UnitTestBase()
     {
         DbContext = new AppDbContext(new DbContextOptionsBuilder().UseInMemoryDatabase("TESTDB").UseLazyLoadingProxies().Options);
     }
 
-    protected AppDbContext DbContext;
+    protected readonly AppDbContext DbContext;
 
     public void Dispose()
     {
