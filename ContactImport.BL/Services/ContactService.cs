@@ -25,7 +25,7 @@ public class ContactService : IContactService
         {
             var entity = new ContactEntity
             {
-                Address = model.Adress,
+                Address = model.Address,
                 Name = model.Name,
                 Surname = model.Surname,
                 RC = model.RC,
@@ -72,7 +72,7 @@ public class ContactService : IContactService
         {
             var model = new ContactModel
             {
-                Adress = entity.Address,
+                Address = entity.Address,
                 Name = entity.Name,
                 Surname = entity.Surname,
                 RC = entity.RC,

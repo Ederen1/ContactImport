@@ -17,7 +17,7 @@ public class ContactServiceUnitTests : UnitTestBase
         {
             new()
             {
-                Adress = "Adresa 1/1 Brno",
+                Address = "Adresa 1/1 Brno",
                 Name = "Jiří",
                 Surname = "Neuhort",
                 RC = "9001019101",
@@ -39,7 +39,7 @@ public class ContactServiceUnitTests : UnitTestBase
         {
             new()
             {
-                Adress = "Adresa 1/1 Brno",
+                Address = "Adresa 1/1 Brno",
                 Name = "Jiří",
                 Surname = "Neuhort",
                 RC = "9001019101",
@@ -47,7 +47,7 @@ public class ContactServiceUnitTests : UnitTestBase
             },
             new()
             {
-                Adress = "Adresa 1/1 Brno",
+                Address = "Adresa 1/1 Brno",
                 Name = "Jiří",
                 Surname = "Neuhort",
                 RC = "9001019101",
@@ -55,7 +55,7 @@ public class ContactServiceUnitTests : UnitTestBase
             },
             new()
             {
-                Adress = "Adresa 1/1 Brno",
+                Address = "Adresa 1/1 Brno",
                 Name = "Jiří",
                 Surname = "Neuhort",
                 RC = "9001019101",
@@ -76,7 +76,7 @@ public class ContactServiceUnitTests : UnitTestBase
         {
             new()
             {
-                Adress = "Adresa 1/1 Brno",
+                Address = "Adresa 1/1 Brno",
                 Name = "Jiří",
                 Surname = "Neuhort",
                 RC = "9001019101",
