@@ -6,16 +6,16 @@
         xmlns:local="clr-namespace:ContactImport"
         xmlns:viewModels="clr-namespace:ContactImport.ViewModels"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800"
+        Title="Contact Import" Height="450" Width="850"
         d:DataContext="{d:DesignInstance viewModels:MainViewModel}">
         <Grid>
                 <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="3*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Button Grid.Column="0" Height="30" VerticalAlignment="Top" Margin="10 10 10 10" Command="{Binding ImportCsvClickCommand}">Import</Button>
+                <Button Grid.Column="0" Height="30" VerticalAlignment="Top" Margin="10" Command="{Binding ImportCsvClickCommand}">Import</Button>
 
-                <DataGrid Grid.Column="1" ItemsSource="{Binding Contacts}" AutoGenerateColumns="False">
+                <DataGrid Grid.Column="1" IsReadOnly="True" Margin="10" ItemsSource="{Binding Contacts}" AutoGenerateColumns="False">
                         <DataGrid.Columns>
                                 <DataGridTextColumn Header="Name" Binding="{Binding Name}"></DataGridTextColumn>
                                 <DataGridTextColumn Header="Surname" Binding="{Binding Surname}"></DataGridTextColumn>
@@ -23,7 +23,7 @@
                                 <DataGridTextColumn Header="Address" Binding="{Binding Address}"></DataGridTextColumn>
                                 <DataGridTextColumn Header="Number 1" Binding="{Binding Number1}"></DataGridTextColumn>
                                 <DataGridTextColumn Header="Number 2" Binding="{Binding Number2}"></DataGridTextColumn>
-                                <DataGridTextColumn Header="Number 3" Binding="{Binding Number3}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="Number 3" Width="*" Binding="{Binding Number3}"></DataGridTextColumn>
                         </DataGrid.Columns>
                 </DataGrid>
         </Grid>

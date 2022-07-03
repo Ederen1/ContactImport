@@ -25,6 +25,7 @@ public class MainViewModel : BaseViewModel
         _contactService = contactService;
         ImportCsvClickCommand = new AsyncRelayCommand(ImportCsvClick);
     }
+    private const string MessageCaption = "Import status";
 
     private async Task ImportCsvClick()
     {
@@ -39,15 +40,11 @@ public class MainViewModel : BaseViewModel
             var (newContacts, updatedContacts) = await _contactService.ImportContacts(contacts);
             await Reload();
 
-            MessageBox.Show($"Successfully imported {newContacts} contacts, updated {updatedContacts}");
-        }
-        catch (InvalidDataException e)
-        {
-            MessageBox.Show($"Invalid data found in file\r\n{e.Message}");
+            MessageBox.Show($"Successfully imported {newContacts} contacts, updated {updatedContacts}", MessageCaption);
         }
         catch (Exception e)
         {
-            MessageBox.Show(e.Message);
+            MessageBox.Show(e.Message, MessageCaption);
         }
     }
 

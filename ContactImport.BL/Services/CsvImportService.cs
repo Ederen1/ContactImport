@@ -3,6 +3,7 @@ using ContactImport.BL.Models;
 using CsvHelper;
 using CsvHelper.Configuration;
 using FluentValidation;
+using ValidationException = FluentValidation.ValidationException;
 
 namespace ContactImport.BL.Services;
 
@@ -30,12 +31,20 @@ public class CsvImportService : ICsvImportService
         csv.GetRecords<ContactModel>();
         var records = csv.GetRecordsAsync<ContactModel>();
         if (records is null)
-            throw new DataException("Invalid data");
-        
+            throw new ValidationException("Invalid data");
+
         var ret = await records.ToListAsync();
+        uint i = 1;
         foreach (var model in ret)
         {
-            await _contactValidator.ValidateAndThrowAsync(model);
+            i++;
+            var result = await _contactValidator.ValidateAsync(model);
+            if (!result.IsValid)
+            {
+                var text = $"Error at line {i}: \r\n";
+                text += string.Join("\r\n", result.Errors);
+                throw new ValidationException(text);
+            }
         }
 
         return ret;
