@@ -19,11 +19,14 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="3*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Button Grid.Column="0" Height="30" VerticalAlignment="Top" Margin="10"
-                Command="{Binding ImportCsvClickCommand}">
-            Import
-        </Button>
-
+        <StackPanel Grid.Column="0">
+            <Button  Height="30" Margin="10"
+                     Command="{Binding ImportCsvClickCommand}">
+                Import
+            </Button>
+            <Button Height="30" Margin="10 0" Command="{Binding DeleteAllCommand}">Delete all contacts</Button>
+        </StackPanel>
+        
         <DataGrid Grid.Column="1" IsReadOnly="True" Margin="10" ItemsSource="{Binding Contacts}"
                   AutoGenerateColumns="False">
             <DataGrid.Columns>

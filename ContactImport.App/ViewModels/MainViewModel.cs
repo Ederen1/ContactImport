@@ -17,29 +17,39 @@ public class MainViewModel : BaseViewModel
     private readonly ICsvImportService _importService;
     private readonly IContactService _contactService;
     public ICommand ImportCsvClickCommand { get; }
-    
     public ICommand ReloadCommand { get; }
+    public ICommand DeleteAllCommand { get; }
+    
     public ObservableCollection<ContactModel> Contacts { get; } = new();
+
 
     public MainViewModel(ICsvImportService importService, IContactService contactService)
     {
         _importService = importService;
         _contactService = contactService;
-        ImportCsvClickCommand = new AsyncRelayCommand(ImportCsvClick);
+        ImportCsvClickCommand = new AsyncRelayCommand(ImportCsv);
         ReloadCommand = new AsyncRelayCommand(Reload);
+        DeleteAllCommand = new AsyncRelayCommand(DeleteAll);
     }
+
+    private async Task DeleteAll()
+    {
+        await _contactService.DeleteAll();
+        await Reload();
+    }
+
     private const string MessageCaption = "Import status";
 
-    private async Task ImportCsvClick()
+    private async Task ImportCsv()
     {
         try
         {
             var fileDialog = new OpenFileDialog();
             if (fileDialog.ShowDialog() != true)
                 return;
-            
+
             var contacts = (await _importService.ReadCsvAsync(fileDialog.FileName)).ToList();
-            
+
             var (newContacts, updatedContacts) = await _contactService.ImportContacts(contacts);
             await Reload();
 

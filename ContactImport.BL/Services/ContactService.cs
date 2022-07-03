@@ -49,4 +49,10 @@ public class ContactService : IContactService
 
         return _mapper.Map<IEnumerable<ContactModel>>(entities);
     }
+
+    public async Task DeleteAll()
+    {
+        var entityType = _dbContext.Model.FindEntityType(typeof(ContactEntity)) ?? throw new InvalidOperationException("Unable to find table name");
+        await _dbContext.Database.ExecuteSqlRawAsync($"TRUNCATE TABLE {entityType.GetSchemaQualifiedTableName()}");
+    }
 }

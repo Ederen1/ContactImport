@@ -14,4 +14,6 @@ public interface IContactService
     /// Gets all contacts stored in database and returns them as list of models
     /// </summary>
     public Task<IEnumerable<ContactModel>> AllContacts();
+
+    Task DeleteAll();
 }
