@@ -9,4 +9,7 @@ public interface ICsvImportService
     /// </summary>
     /// <param name="path">CSV file path</param>
     public Task<IEnumerable<ContactModel>> ReadFileAsync(string path);
+
+    public Task<IEnumerable<ContactModel>> ReadStreamAsync(TextReader reader);
+
 }

@@ -5,7 +5,7 @@ namespace ContactImport.BL.Validators;
 
 public class ContactModelValidator : AbstractValidator<ContactModel>
 {
-    private const string RcRegex = @"\d{9,10}";
+    private const string RcRegex = @"^\d{9,10}$";
     private const string NumberRegex = @"^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$";
 
     public ContactModelValidator()

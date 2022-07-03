@@ -18,14 +18,12 @@ public class MainViewModel : BaseViewModel
 {
     private readonly ICsvImportService _importService;
     private readonly IContactService _contactService;
-    private readonly IValidator<ContactModel> _contactValidator;
     public ICommand ImportCsvClickCommand { get; set; }
 
-    public MainViewModel(ICsvImportService importService, IContactService contactService, IValidator<ContactModel> contactValidator)
+    public MainViewModel(ICsvImportService importService, IContactService contactService)
     {
         _importService = importService;
         _contactService = contactService;
-        _contactValidator = contactValidator;
         ImportCsvClickCommand = new AsyncRelayCommand(ImportCsvClick);
     }
 
@@ -38,17 +36,6 @@ public class MainViewModel : BaseViewModel
                 return;
             
             var contacts = (await _importService.ReadFileAsync(fileDialog.FileName)).ToList();
-            foreach (var contact in contacts)
-            {
-                var res = await _contactValidator.ValidateAsync(contact);
-                if (!res.IsValid)
-                {
-                    var message = "Validation error: \r\n";
-                    res.Errors.ForEach(err => message += $"Property '{err.PropertyName}' has invalid value of '{err.AttemptedValue}'\r\n");
-                    MessageBox.Show(message);
-                    return;
-                }
-            }
             
             var (newContacts, updatedContacts) = await _contactService.ImportContacts(contacts);
             MessageBox.Show($"Successfully imported {newContacts} contacts, updated {updatedContacts}");
