@@ -26,8 +26,11 @@ public class ContactService : IContactService
                 item => item.RC == model.RC);
             if (inDb is not null)
             {
-                _dbContext.Entry(inDb).CurrentValues.SetValues(model);
-                updatedContacts++;
+                var entry = _dbContext.Entry(inDb);
+                entry.CurrentValues.SetValues(model);
+
+                if (entry.State == EntityState.Modified)
+                    updatedContacts++;
             }
             else
             {
